@@ -1,24 +1,27 @@
-import components from './components/index.js'
-Vue.createApp({
-    props:[],
-    components:{
-        inputText:components.inputText
-    },
-    template: `
+<template>
     <div class="container">
         <div class="card p-3 my-3 max-width-500">
         <h2>Registration Form</h2>
         <inputText id="firstName" type="text"  placeholder="John"  label="First name" @parent="print" validator="name" :submitted="submitted"/>
         <inputText id="lastName" type="text" placeholder="Doe"  label="Last name" @parent="print" validator="name" :submitted="submitted"/>
-        <inputText id="password" type="password" placeholder=""  label="Password" @parent="print"validator="password" :submitted="submitted"/>
+        <inputText id="password" type="password" placeholder=""  label="Password" @parent="print" validator="password" :submitted="submitted"/>
         <inputText id="age" type="number" placeholder="100"  label="Age" @parent="print" validator="age" :submitted="submitted"/>
         <button class="btn btn-secondary my-4" @click="submit">Submit</button>
         </div>
         <p>{{result}}</p>
     </div>  
-    
-    `,
-    data:()=>({
+</template>
+
+<script>
+// import HelloWorld from './components/HelloWorld.vue'
+import InputText from './components/InpuText.vue'
+
+export default {
+  name: 'App',
+  components: {
+    InputText
+  },
+      data:()=>({
     submitted:false,
     data:{error:{}},
     result:''
@@ -47,10 +50,9 @@ Vue.createApp({
         }
 
     },
-    computed:{
-    
-    },
-    mounted:()=>({
+}
+</script>
 
-    })
-}).mount('#app')
+<style>
+
+</style>
