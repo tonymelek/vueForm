@@ -1,7 +1,7 @@
 <template>
       <div>
         <label for="id" class="form-label mt-2">{{label}}</label>
-        <input :type="type" class="form-control" id="id" :placeholder='placeholder'  v-model="value" @input="test" :validator="validator" min="1" max="99">
+        <input :type="type" class="form-control" :id="id" :placeholder='placeholder'  v-model="value" @input="test" :validator="validator" min="1" max="99">
         <p :class="enableError"><sup>*</sup><small class='px-2'>{{error}}</small></p>  
         </div>
 </template>
@@ -10,6 +10,7 @@ import validators from '../validators'
 export default {
   name: 'InputText',
  props: ["id","placeholder","label","type","validator","submitted"],
+ emits:["parent"],
     compontents: {
 
     },
