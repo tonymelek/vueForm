@@ -24,8 +24,18 @@ export default {
       data:()=>({
     submitted:false,
     data:{error:{}},
-    result:''
     }),
+    computed:{
+errorSum(){
+    return Object.keys(this.data.error).reduce((a,b)=>this.data.error[b]+a,0)
+},
+result(){
+    if(this.submitted && !!this.errorSum) {   
+      return `Please, fix the ${this.errorSum} error(s) and re-submit`;
+    }
+    return ''
+}
+    },
     methods:{
         print(payload){
             let formItem=''
@@ -37,16 +47,8 @@ export default {
             this.data.error[formItem] = payload.error;
         },
         submit(){
-
-            this.submitted = true;
-            const errorSum=Object.keys(this.data.error).reduce((a,b)=>this.data.error[b]+a,0)
-            
-            if(!errorSum) {
-                this.result='submitted successfully'
-                //disable submit
-            }else{
-                this.result=`Please, fix the ${errorSum} error(s) and re-submit`
-            }
+            this.submitted = true;  
+       
         }
 
     },

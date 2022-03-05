@@ -1,14 +1,22 @@
 <template>
       <div>
         <label for="id" class="form-label mt-2">{{label}}</label>
-        <input :type="type" class="form-control" :id="id" :placeholder='placeholder'  v-model="value" @input="test" :validator="validator" min="1" max="99">
+        <input :type="type"
+         class="form-control"
+         :class="error&&submitted?'bg-error':''"
+          :id="id" 
+          :placeholder='placeholder'
+            v-model="value"
+           @input="emitToParent"
+           :validator="validator"
+           min="1" max="99">
         <p :class="enableError"><sup>*</sup><small class='px-2'>{{error}}</small></p>  
         </div>
 </template>
 <script>
 import validators from '../validators'
 export default {
-  name: 'InputText',
+ name: 'InputText',
  props: ["id","placeholder","label","type","validator","submitted"],
  emits:["parent"],
     compontents: {
@@ -21,7 +29,7 @@ export default {
         value:''
     }),
     methods: {
-        test(){
+        emitToParent(){
             this.$emit("parent",{[this.id]:this.value, error:this.error!==''?1:0})
         }
     },
@@ -39,3 +47,8 @@ export default {
     }
 }
 </script>
+<style scoped>
+.bg-error{
+    background: #f0d1f4;
+}
+</style>
